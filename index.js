@@ -27,6 +27,7 @@ const racuni = {
 
 for (const [key, value] of Object.entries(racuni)) {
   bot.action(key, (ctx) => {
+    ctx.reply(`Racun za ${key} je:`);
     ctx.reply(value);
   });
 }
