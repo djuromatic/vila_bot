@@ -6,6 +6,7 @@ const bot = new Telegraf("6435064171:AAF53yRhPfsabCvdzm1HSPWZaDnSzJTm9tM")
 console.log('Bot has been started ...')
 // Define the menu
 const menu = Markup.inlineKeyboard([
+  Markup.button.url('vila-split', 'https://vila-spliit.duckdns.org/'),
   Markup.button.callback('💬 Brojevi Racuna', 'racuni'),
 ]);
 
