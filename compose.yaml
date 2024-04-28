@@ -3,3 +3,4 @@ services:
     build:
       context: .
     container_name: vila_bot
+    restart: always
