@@ -1,0 +1,5 @@
+services:
+  vila_bot:
+    build:
+      context: .
+    container_name: vila_bot
