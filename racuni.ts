@@ -12,7 +12,7 @@ export const getAllMemberNamesButtons = async (bot) => {
 
   //handle click on member name
   bot.action(/racuni.*/, async (ctx) => {
-    console.log("racuni", ctx.match[0]);
+    const members = await getAllmembers();
     const member = members.find((member) => member.username === ctx.match[0].split("-")[1])
 
     if (!member) {
@@ -28,17 +28,15 @@ export const getAllMemberNamesButtons = async (bot) => {
         const userId = ctx.from.id;
         try {
           await setMemberCardNumber(userId, cardNumber);
-          ctx.reply("Card number saved");
+          ctx.reply(`Card number saved ${cardNumber}`);
         } catch (error) {
           ctx.reply("Error saving card number");
         }
       })
     }
-
-
-    ctx.reply(member.cardNumber);
+    else {
+      ctx.reply(`${member.username} Card number: ${member.cardNumber}`);
+    }
   });
-
-
   return ui;
 }
