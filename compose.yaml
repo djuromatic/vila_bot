@@ -9,6 +9,9 @@ services:
       - BOT_TOKEN=${BOT_TOKEN}
       - REDIS_URL=redis://redis:6379
     restart: always
+    depends_on:
+      redis:
+        condition: service_healthy
 
   redis:
     image: redis:latest
