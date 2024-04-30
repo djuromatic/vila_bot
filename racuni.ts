@@ -9,7 +9,6 @@ export const getAllMemberNamesButtons = async (bot) => {
     members.map((member) => Markup.button.callback(member.username, "racuni-" + member.username))
   );
 
-
   //handle click on member name
   bot.action(/racuni.*/, async (ctx) => {
     const members = await getAllmembers();
@@ -20,6 +19,7 @@ export const getAllMemberNamesButtons = async (bot) => {
     }
 
     if (!member.cardNumber) {
+      let input = false
       ctx.reply("Card number not found enter one to save");
       bot.on("text", async (ctx) => {
         const cardNumber = ctx.message.text
@@ -27,8 +27,11 @@ export const getAllMemberNamesButtons = async (bot) => {
         // check if user is owner of the card
         const userId = ctx.from.id;
         try {
-          await setMemberCardNumber(userId, cardNumber);
-          ctx.reply(`Card number saved ${cardNumber}`);
+          if (!input) {
+            await setMemberCardNumber(userId, cardNumber);
+            input = true;
+            ctx.reply(`Card number saved ${cardNumber}`);
+          }
         } catch (error) {
           ctx.reply("Error saving card number");
         }
@@ -40,3 +43,4 @@ export const getAllMemberNamesButtons = async (bot) => {
   });
   return ui;
 }
+
